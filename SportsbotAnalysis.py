@@ -41,50 +41,63 @@ def open_rollbit_sports():
         print(var)
 
         #Formulas for various column outputs
-        d9_str="=IFERROR(LEFT(H" + str(i+2) + ",LEN(H" + str(i+2) + ")-1)*10^(SEARCH(RIGHT(H" + str(i+2) + "),\"kmbt\")*3),H" + str(i+2) + ")"
-        d10_str="=LEFT(C" + str(i+2) + ",SEARCH(\"·\",C" + str(i+2) + ")-1)"
-        d11_str="=MID(C" + str(i+2) + ",SEARCH(\"·\",C" + str(i+2) + ")+2,SEARCH(\"·\",C" + str(i+2) + ",SEARCH(\"·\",C" + str(i+2) + ")+1)-SEARCH(\"·\",C" + str(i+2) + ")-2)"
-        d12_str="=J" + str(i+2) + "+0.6*K" + str(i+2)
-        d13_str="=I" + str(i+2) + "/L" + str(i+2)
-        d14_str="=I" + str(i+2) + "/(0.6*K"  + str(i+2) + ")"
+        d10_str="=IFERROR(LEFT(I" + str(i+2) + ",LEN(I" + str(i+2) + ")-1)*10^(SEARCH(RIGHT(I" + str(i+2) + "),\"kmbt\")*3),I" + str(i+2) + ")"
+        d11_str="=LEFT(D" + str(i+2) + ",SEARCH(\"·\",D" + str(i+2) + ")-1)"
+        d12_str="=MID(D" + str(i+2) + ",SEARCH(\"·\",D" + str(i+2) + ")+2,SEARCH(\"·\",D" + str(i+2) + ",SEARCH(\"·\",D" + str(i+2) + ")+1)-SEARCH(\"·\",D" + str(i+2) + ")-2)"
+        d13_str="=RIGHT(D" + str(i+2) + ",4)"
+        d14_str="=K" + str(i+2) + "+0.6*L" + str(i+2)
+        d15_str="=J" + str(i+2) + "/M" + str(i+2)
+        d16_str="=J" + str(i+2) + "/(0.6*L"  + str(i+2) + ")"
 
-        d0.append(var[0])
-        d1.append(var[1])
+
         if len(var[0]) < 5:
-            d2.append("Unrevealed")
-            d3.append(var[2])
-            d4.append(var[3])
-            d5.append(var[4])
-            d6.append(var[5])
-            d8.append(var[7])
-            d9.append(d9_str)
-            d10.append("N/A")
+            d0.append(var[0])
+            d1.append("Unrevealed")
+            d2.append(var[1])
+            d3.append("Unrevealed")
+            d4.append(var[2])
+            d5.append(var[3])
+            d6.append(var[4])
+            d8.append(var[5])
+            d9.append(var[7])
+            d10.append(d10_str)
             d11.append("N/A")
             d12.append("N/A")
             d13.append("N/A")
             d14.append("N/A")
+            d15.append("N/A")
+            d16.append("N/A")
         else:
-            d2.append(var[2])
-            d3.append(var[3])
-            d4.append(var[4])
+            title=var[0].split()
+            d0.append(title[0])
+            sport=""
+            for l in range(1,len(title)):
+                sport+=(title[l] + " ")
+            d1.append(sport)
+            d2.append(var[1])
+            d3.append(var[2])
+            d4.append(var[3])
+            d5.append(var[4])
 
             #Check if Rollbit shows suggested prices properly
-            if var[4] != "Suggested prices not available":
-                d5.append(var[5])
-                d6.append(var[6])
-                d8.append(var[8])
-            else:
-                d5.append(var[4])
-                d6.append(var[4])
+            if var[3] != "Suggested prices not available":
+                #d5.append(var[4])
+                d6.append(var[5])
                 d8.append(var[6])
+                d9.append(var[8])
+            else:
+                d6.append(var[3])
+                d8.append(var[3])
+                d9.append(var[5])
         
 
-            d9.append(d9_str)
             d10.append(d10_str)
             d11.append(d11_str)
             d12.append(d12_str)
             d13.append(d13_str)
             d14.append(d14_str)
+            d15.append(d15_str)
+            d16.append(d16_str)
 
 
 #Use headless chromedriver for browser
@@ -104,6 +117,8 @@ d11 = []
 d12 = []
 d13 = []
 d14 = []
+d15 = []
+d16 = []
 
 #Sorting can be changed from "low" to "high"
 sort = "low"
@@ -125,7 +140,7 @@ else:
     open_rollbit_sports()
 
 #Create excel file and column headers
-df = pd.DataFrame({'Name': d0, 'Collection': d1, 'Stats': d2, 'User': d3, 'Low': d4, 'Suggested': d5, 'High': d6, 'Current': d8, 'Current(adjusted)': d9, 'Share(current)': d10, 'Free Bet': d11, 'Monthly': d12, 'ROI(Months)': d13, 'ROI(no shares)': d14})
+df = pd.DataFrame({'Number': d0, 'Name': d1, 'Collection': d2, 'Stats': d3, 'User': d4, 'Low': d5, 'Suggested': d6, 'High': d8, 'Current': d9, 'Current(adjusted)': d10, 'Share(current)': d11, 'Free Bet': d12, 'Parlay': d13, 'Monthly': d14, 'ROI(monthly)': d15, 'ROI(no shares)': d16})
 df.to_csv('sports_rollbots.csv', index=False, encoding='utf-8')
 
 browser.quit()
