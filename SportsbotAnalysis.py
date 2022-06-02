@@ -50,27 +50,41 @@ def open_rollbit_sports():
 
         d0.append(var[0])
         d1.append(var[1])
-        d2.append(var[2])
-        d3.append(var[3])
-        d4.append(var[4])
-
-        #Check if Rollbit shows suggested prices properly
-        if var[4] != "Suggested prices not available":
-            d5.append(var[5])
-            d6.append(var[6])
-            d8.append(var[8])
-        else:
+        if len(var[0]) < 5:
+            d2.append("Unrevealed")
+            d3.append(var[2])
+            d4.append(var[3])
             d5.append(var[4])
-            d6.append(var[4])
-            d8.append(var[6])
+            d6.append(var[5])
+            d8.append(var[7])
+            d9.append(d9_str)
+            d10.append("N/A")
+            d11.append("N/A")
+            d12.append("N/A")
+            d13.append("N/A")
+            d14.append("N/A")
+        else:
+            d2.append(var[2])
+            d3.append(var[3])
+            d4.append(var[4])
+
+            #Check if Rollbit shows suggested prices properly
+            if var[4] != "Suggested prices not available":
+                d5.append(var[5])
+                d6.append(var[6])
+                d8.append(var[8])
+            else:
+                d5.append(var[4])
+                d6.append(var[4])
+                d8.append(var[6])
         
 
-        d9.append(d9_str)
-        d10.append(d10_str)
-        d11.append(d11_str)
-        d12.append(d12_str)
-        d13.append(d13_str)
-        d14.append(d14_str)
+            d9.append(d9_str)
+            d10.append(d10_str)
+            d11.append(d11_str)
+            d12.append(d12_str)
+            d13.append(d13_str)
+            d14.append(d14_str)
 
 
 #Use headless chromedriver for browser
@@ -111,7 +125,7 @@ else:
     open_rollbit_sports()
 
 #Create excel file and column headers
-df = pd.DataFrame({'Name': d0, 'Collection': d1, 'Rolled?': d2, 'User': d3, 'Low': d4, 'Suggested': d5, 'High': d6, 'Current': d8, 'Current(adjusted)': d9, 'Share(current)': d10, 'Free Bet': d11, 'Monthly': d12, 'ROI(Monthly)': d13, 'ROI(no shares)': d14})
+df = pd.DataFrame({'Name': d0, 'Collection': d1, 'Stats': d2, 'User': d3, 'Low': d4, 'Suggested': d5, 'High': d6, 'Current': d8, 'Current(adjusted)': d9, 'Share(current)': d10, 'Free Bet': d11, 'Monthly': d12, 'ROI(Months)': d13, 'ROI(no shares)': d14})
 df.to_csv('sports_rollbots.csv', index=False, encoding='utf-8')
 
 browser.quit()
