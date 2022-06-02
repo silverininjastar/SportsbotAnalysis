@@ -46,7 +46,7 @@ def open_rollbit_sports():
         d12_str="=MID(D" + str(i+2) + ",SEARCH(\"·\",D" + str(i+2) + ")+2,SEARCH(\"·\",D" + str(i+2) + ",SEARCH(\"·\",D" + str(i+2) + ")+1)-SEARCH(\"·\",D" + str(i+2) + ")-2)"
         d13_str="=RIGHT(D" + str(i+2) + ",4)"
         d14_str="=K" + str(i+2) + "+0.6*L" + str(i+2)
-        d15_str="=J" + str(i+2) + "/M" + str(i+2)
+        d15_str="=J" + str(i+2) + "/N" + str(i+2)
         d16_str="=J" + str(i+2) + "/(0.6*L"  + str(i+2) + ")"
 
 
