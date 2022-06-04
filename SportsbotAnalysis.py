@@ -2,6 +2,7 @@ import requests
 from selenium import webdriver
 from bs4 import BeautifulSoup
 import socket
+from datetime import datetime
 import time
 from selenium.webdriver.chrome.options import Options
 import pandas as pd
@@ -139,8 +140,8 @@ if vpn == True:
 else:
     open_rollbit_sports()
 
-#Create excel file and column headers
+#Create .csv file and column headers
 df = pd.DataFrame({'Number': d0, 'Name': d1, 'Collection': d2, 'Stats': d3, 'User': d4, 'Low': d5, 'Suggested': d6, 'High': d8, 'Current': d9, 'Current(adjusted)': d10, 'Share(current)': d11, 'Free Bet': d12, 'Parlay': d13, 'Monthly': d14, 'ROI(monthly)': d15, 'ROI(no shares)': d16})
+#df.to_csv(str('sports_rollbots' + str(datetime.now().isoformat(timespec='minutes')) + '.csv'), index=False, encoding='utf-8')
 df.to_csv('sports_rollbots.csv', index=False, encoding='utf-8')
-
 browser.quit()
