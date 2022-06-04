@@ -12,14 +12,10 @@ chrome_options = Options()
 chrome_options.add_argument("--headless")
 
 rollbit_sports_by_price_low = "https://rollbit.com/nft/lobby/sportsbots?count=10000&sort=price.asc"
-rollbit_sports_by_price_high = "https://rollbit.com/nft/lobby/sportsbots?count=10000&sort=price.desc"
 
 def open_rollbit_sports():
     print("Opening Chrome to Rollbit Sportsbots Marketplace")   
-    if sort == "low":
-        browser.get(rollbit_sports_by_price_low)
-    elif sort == "high":
-        browser.get(rollbit_sports_by_price_high)
+    browser.get(rollbit_sports_by_price_low)
     time.sleep(10)
 
     #Grab Data
